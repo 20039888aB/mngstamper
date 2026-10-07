@@ -36,3 +36,6 @@ pnpm-debug.log*
 
 # Test / coverage
 coverage
+
+# TypeScript incremental build artifacts
+*.tsbuildinfo
