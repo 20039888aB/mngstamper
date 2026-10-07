@@ -46,6 +46,36 @@
   .input {
     @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
   }
+
+  /* Premium glass-morphism surfaces — used by the dashboard hero, which sits
+     over a background photograph. Dark frosted panels reveal the image behind
+     them via backdrop-filter, with a hairline top highlight for depth. */
+  .glass-surface {
+    border-radius: 1rem;
+    background-color: rgb(2 6 23 / 0.42);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    box-shadow:
+      0 8px 32px rgb(2 6 23 / 0.30),
+      inset 0 1px 0 0 rgb(255 255 255 / 0.18);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
+  }
+  .glass-surface-soft {
+    background-color: rgb(2 6 23 / 0.32);
+  }
+  .glass-hover {
+    transition:
+      transform 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-2px);
+    background-color: rgb(2 6 23 / 0.55);
+    box-shadow:
+      0 16px 44px rgb(2 6 23 / 0.45),
+      inset 0 1px 0 0 rgb(255 255 255 / 0.24);
+  }
 }
 
 /* Document previews keep their natural paper appearance even in dark mode

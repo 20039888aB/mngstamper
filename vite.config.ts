@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'logo.jpg'],
       manifest: {
         name: 'Universal Rubber Stamp',
         short_name: 'URS',
@@ -20,14 +20,8 @@ export default defineConfig({
         scope: '/',
         start_url: '/',
         icons: [
-          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable',
-          },
+          { src: 'logo.jpg', sizes: '192x192', type: 'image/jpeg' },
+          { src: 'logo.jpg', sizes: '512x512', type: 'image/jpeg' },
         ],
       },
       workbox: {
@@ -41,5 +35,13 @@ export default defineConfig({
   build: {
     target: 'es2020',
     chunkSizeWarningLimit: 1500,
+  },
+  server: {
+    watch: {
+      // Browsers drop in-progress downloads into the folder as locked
+      // "Unconfirmed *.crdownload" / *.part files. Watching those makes
+      // Vite's file watcher crash with EBUSY, so skip them explicitly.
+      ignored: ['**/*.crdownload', '**/Unconfirmed*', '**/*.part', '**/*.tmp'],
+    },
   },
 })
