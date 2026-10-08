@@ -3,6 +3,7 @@ import { usePreferences } from '../context/PreferencesContext'
 import { t } from '../i18n'
 import { cn } from '../lib/utils'
 import { Logo } from './Logo'
+import { InstallPrompt } from './InstallPrompt'
 import { ThemeToggle } from './ThemeToggle'
 import {
   IconDocument,
@@ -73,6 +74,7 @@ export function Layout() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2 md:ml-3">
+            <InstallPrompt />
             <PrivacyPill />
             <ThemeToggle />
           </div>

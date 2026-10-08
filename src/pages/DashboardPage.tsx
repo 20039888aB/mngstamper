@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { InstallPrompt } from '../components/InstallPrompt'
 import { StampPreview } from '../components/StampPreview'
 import {
   IconDocument,
@@ -92,6 +93,7 @@ export function DashboardPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               {t('privacy.localOn')}
             </span>
+            <InstallPrompt variant="glass" />
           </div>
         </section>
 
