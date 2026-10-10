@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
       react(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'logo.jpg'],
+        includeAssets: ['favicon.svg', 'logo.jpg'],
         manifest: {
           id: base,
           name: 'Universal Rubber Stamp',
