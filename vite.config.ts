@@ -2,10 +2,19 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// GitHub Pages serves a project site under /<repo>/, so production builds use
-// that base. Dev always serves from "/" for convenience. If the repo is ever
-// renamed or served from a custom domain, adjust PROD_BASE accordingly.
-const PROD_BASE = '/mngstamper/'
+// Minimal ambient typing so `tsc -b` accepts the single process.env read below
+// without pulling in @types/node as a new dependency.
+declare const process: { env: { VERCEL?: string } }
+
+// Two hosting targets share this one build:
+//   - GitHub Pages serves the project site beneath /<repo>/, so it needs
+//     base '/mngstamper/'.
+//   - Vercel serves the same dist/ at the domain ROOT, so it needs base '/'.
+// Vercel always sets process.env.VERCEL (=1) during its build, GitHub Pages
+// does not, so we key the production base off that. Dev serves from "/".
+// If the repo is ever renamed, adjust GH_PAGES_BASE accordingly.
+const GH_PAGES_BASE = '/mngstamper/'
+const PROD_BASE = process.env.VERCEL ? '/' : GH_PAGES_BASE
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
