@@ -8,9 +8,86 @@
       name="description"
       content="Universal Rubber Stamp — stamp PDF, Word and Excel documents. Anywhere. Securely. Privacy-first, processed on your device."
     />
+    <meta
+      name="keywords"
+      content="rubber stamp, stamp pdf, stamp document online, word stamping, excel stamping, pdf tools, privacy-first, offline pwa, company stamp, digital seal"
+    />
+    <meta name="author" content="Universal Rubber Stamp" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="/" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Universal Rubber Stamp" />
+    <meta property="og:title" content="Universal Rubber Stamp — Stamp Documents. Anywhere. Securely." />
+    <meta
+      property="og:description"
+      content="Privacy-first PWA to stamp PDF, Word and Excel documents directly in your browser. Documents never leave your device."
+    />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/logo.jpg" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Universal Rubber Stamp" />
+    <meta
+      name="twitter:description"
+      content="Stamp PDF, Word and Excel documents in your browser. Privacy-first, works offline, installable as a PWA."
+    />
+    <meta name="twitter:image" content="/logo.jpg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <link rel="apple-touch-icon" href="/logo.jpg" />
     <title>Universal Rubber Stamp</title>
+
+    <!--
+      Structured data (JSON-LD). The __BASE__ placeholder is resolved at runtime
+      so the one build works on both hosts: Vercel serves the app at the domain
+      root, GitHub Pages beneath /mngstamper/ (derived from the current URL).
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Universal Rubber Stamp",
+        "url": "__BASE__",
+        "description": "Privacy-first web app and installable PWA to stamp rubber stamps, seals and signatures onto PDF, Word and Excel documents. All processing happens locally on the user's device.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web, Windows, macOS, Linux, Android, iOS",
+        "browserRequirements": "Requires JavaScript. Requires a modern browser.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "featureList": [
+          "Stamp PDF, Word and Excel documents",
+          "Design custom rubber stamps",
+          "100% local, privacy-first processing",
+          "Works offline as an installable PWA",
+          "Stamp and document history"
+        ]
+      }
+    </script>
+    <script>
+      (function () {
+        var match = window.location.pathname.match(/^\/(mngstamper)(\/|$)/);
+        var base = window.location.origin + (match ? '/' + match[1] + '/' : '/');
+        var head = document.head;
+        var jsonld = head.querySelector('script[type="application/ld+json"]');
+        if (jsonld) jsonld.textContent = jsonld.textContent.replace('__BASE__', base);
+        var canonicalLink = head.querySelector('link[rel="canonical"]');
+        if (canonicalLink) canonicalLink.setAttribute('href', base);
+        var ogUrl = head.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute('content', base);
+        var resolve = function (selector, attr) {
+          var el = head.querySelector(selector);
+          if (el) el.setAttribute(attr, base + el.getAttribute(attr).replace(/^\//, ''));
+        };
+        resolve('meta[property="og:image"]', 'content');
+        resolve('meta[name="twitter:image"]', 'content');
+        // Note: <link rel="icon"> hrefs are already base-prefixed by Vite at
+        // build time, so they are intentionally left untouched here.
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

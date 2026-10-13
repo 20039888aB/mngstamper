@@ -5,6 +5,7 @@ import { IconCopy, IconPlus, IconTrash } from '../components/icons'
 import { useTemplates } from '../context/TemplatesContext'
 import { t } from '../i18n'
 import { createStampInstance } from '../lib/stamp/defaults'
+import { useDocumentMeta } from '../lib/seo'
 import { cn } from '../lib/utils'
 import type { StampInstance, StampTemplate } from '../types/stamp'
 
@@ -22,6 +23,10 @@ function draftFromTemplate(tpl?: StampTemplate): StampInstance {
 }
 
 export function DesignStampPage() {
+  useDocumentMeta(
+    'Design a Stamp',
+    'Design custom rubber stamps and seals — text, shapes, colors and layout — then reuse them across all your documents.',
+  )
   const templates = useTemplates()
   const [draft, setDraft] = useState<StampInstance>(() => draftFromTemplate())
   const [editingId, setEditingId] = useState<string | null>(null)

@@ -7,6 +7,7 @@ import { clearAllStore } from '../lib/storage'
 import { getActiveOrganization, saveOrganization } from '../lib/organizations'
 import { fileToDataUrl, cn, formatBytes } from '../lib/utils'
 import { SERVER_PROCESSING_AVAILABLE, MAX_FILE_BYTES } from '../lib/env'
+import { useDocumentMeta } from '../lib/seo'
 import type { Organization, UserPreferences } from '../types/organization'
 
 function Section({
@@ -76,6 +77,10 @@ const THEMES: { value: UserPreferences['theme']; label: string }[] = [
 ]
 
 export function SettingsPage() {
+  useDocumentMeta(
+    'Settings',
+    'Configure appearance, privacy and processing, organization defaults, stamp colors and language for Universal Rubber Stamp.',
+  )
   const { prefs, update, reset } = usePreferences()
   const [org, setOrg] = useState<Organization>(() => getActiveOrganization(prefs))
   const logoInputRef = useRef<HTMLInputElement>(null)

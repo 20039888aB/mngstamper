@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { IconTrash } from '../components/icons'
 import { useHistory, type HistoryStatus } from '../context/HistoryContext'
 import { t } from '../i18n'
+import { useDocumentMeta } from '../lib/seo'
 import { cn } from '../lib/utils'
 
 type Filter = 'all' | HistoryStatus
@@ -15,6 +16,10 @@ function formatDateTime(iso: string): string {
 }
 
 export function HistoryPage() {
+  useDocumentMeta(
+    'Stamping History',
+    'Browse every document you have stamped, with status, dates and a quick way to review your stamping records.',
+  )
   const { entries, remove, clear } = useHistory()
   const [filter, setFilter] = useState<Filter>('all')
 

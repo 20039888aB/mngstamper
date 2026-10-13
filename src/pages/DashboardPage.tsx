@@ -11,6 +11,7 @@ import { useHistory } from '../context/HistoryContext'
 import { useTemplates } from '../context/TemplatesContext'
 import { t } from '../i18n'
 import dashboardBg from '../images/home page image.jpg'
+import { useDocumentMeta } from '../lib/seo'
 
 function timeAgo(iso: string): string {
   const then = new Date(iso).getTime()
@@ -56,6 +57,10 @@ const ACTIONS = [
 ]
 
 export function DashboardPage() {
+  useDocumentMeta(
+    undefined,
+    'Stamp PDF, Word and Excel documents with custom rubber stamps, seals and signatures. Privacy-first, processed entirely in your browser.',
+  )
   const { entries } = useHistory()
   const { builtin } = useTemplates()
   const recent = entries.slice(0, 5)

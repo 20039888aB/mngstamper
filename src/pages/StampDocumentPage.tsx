@@ -23,6 +23,7 @@ import { usePreferences } from '../context/PreferencesContext'
 import { useTemplates } from '../context/TemplatesContext'
 import { t } from '../i18n'
 import { MAX_FILE_BYTES } from '../lib/env'
+import { useDocumentMeta } from '../lib/seo'
 import { loadPdfForPreview } from '../lib/documents/pdfPreview'
 import { PDFProcessor } from '../lib/documents/pdfProcessor'
 import { isNativeStampable, validateFile } from '../lib/documents/validation'
@@ -98,6 +99,10 @@ interface DocState {
 type Panel = 'none' | 'unsupported-format' | 'load-error'
 
 export function StampDocumentPage() {
+  useDocumentMeta(
+    'Stamp a Document',
+    'Stamp a rubber stamp, seal or signature onto your PDF, Word or Excel document. Files never leave your device.',
+  )
   const { prefs, update } = usePreferences()
   const templates = useTemplates()
   const { add: addHistory } = useHistory()
