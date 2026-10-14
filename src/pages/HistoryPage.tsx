@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { IconTrash } from '../components/icons'
+import { IconHistory, IconTrash } from '../components/icons'
 import { useHistory, type HistoryStatus } from '../context/HistoryContext'
 import { t } from '../i18n'
 import { useDocumentMeta } from '../lib/seo'
@@ -39,9 +39,12 @@ export function HistoryPage() {
 
   if (entries.length === 0) {
     return (
-      <div className="mx-auto max-w-lg py-16 text-center">
-        <h2 className="text-xl font-semibold">{t('nav.history')}</h2>
-        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+      <div className="mx-auto flex max-w-lg flex-col items-center gap-3 py-16 text-center">
+        <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-gradient-soft text-brand-700 ring-1 ring-inset ring-brand-600/15 dark:text-brand-300">
+          <IconHistory width={26} height={26} />
+        </span>
+        <h2 className="text-xl font-semibold tracking-tight">{t('nav.history')}</h2>
+        <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">
           Nothing here yet. Every document you stamp is logged on this device only —
           names and settings, never the file contents.
         </p>
@@ -52,7 +55,7 @@ export function HistoryPage() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-3">
-        <h2 className="text-xl font-semibold">{t('nav.history')}</h2>
+        <h2 className="text-xl font-semibold tracking-tight">{t('nav.history')}</h2>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           {counts.success} succeeded · {counts.failed} failed
         </p>
@@ -76,10 +79,10 @@ export function HistoryPage() {
             aria-selected={filter === f}
             onClick={() => setFilter(f)}
             className={cn(
-              'rounded-lg px-3 py-1.5 text-sm font-medium capitalize',
+              'rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition-all duration-200 active:scale-[0.98]',
               filter === f
-                ? 'bg-brand-50 text-brand-800 dark:bg-brand-900/40 dark:text-brand-200'
-                : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800',
+                ? 'bg-brand-gradient text-white shadow-sm shadow-brand-900/30'
+                : 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800',
             )}
           >
             {f} ({counts[f]})
@@ -89,11 +92,16 @@ export function HistoryPage() {
 
       <ul className="card divide-y divide-slate-100 dark:divide-slate-800">
         {shown.map((e) => (
-          <li key={e.id} className="flex items-start gap-3 px-4 py-3">
+          <li
+            key={e.id}
+            className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/40"
+          >
             <span
               className={cn(
-                'mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full',
-                e.status === 'success' ? 'bg-emerald-500' : 'bg-red-500',
+                'mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ring-2',
+                e.status === 'success'
+                  ? 'bg-emerald-500 ring-emerald-500/20'
+                  : 'bg-red-500 ring-red-500/20',
               )}
               title={e.status}
             />

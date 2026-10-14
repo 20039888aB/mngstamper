@@ -21,9 +21,7 @@ function Section({
 }) {
   return (
     <section className="card p-5">
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-        {title}
-      </h3>
+      <h3 className="eyebrow">{title}</h3>
       {desc && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{desc}</p>}
       <div className="mt-3 space-y-4">{children}</div>
     </section>
@@ -49,8 +47,8 @@ function Toggle({
       </span>
       <span
         className={cn(
-          'relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors',
-          checked ? 'bg-brand-600' : 'bg-slate-300 dark:bg-slate-700',
+          'relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-300',
+          checked ? 'bg-brand-gradient' : 'bg-slate-300 dark:bg-slate-700',
         )}
       >
         <input
@@ -61,7 +59,7 @@ function Toggle({
         />
         <span
           className={cn(
-            'inline-block h-5 w-5 transform rounded-full bg-white transition-transform',
+            'inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-300',
             checked ? 'translate-x-5' : 'translate-x-0.5',
           )}
         />
@@ -126,9 +124,9 @@ export function SettingsPage() {
                 onClick={() => update({ theme: th.value })}
                 aria-pressed={prefs.theme === th.value}
                 className={cn(
-                  'flex-1 rounded-lg border px-3 py-2 text-sm font-medium capitalize',
+                  'flex-1 rounded-lg border px-3 py-2 text-sm font-medium capitalize transition-all duration-200 active:scale-[0.98]',
                   prefs.theme === th.value
-                    ? 'border-brand-600 bg-brand-50 text-brand-800 dark:bg-brand-900/40 dark:text-brand-200'
+                    ? 'border-transparent bg-brand-gradient text-white shadow-sm shadow-brand-900/30'
                     : 'border-slate-300 text-slate-600 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800',
                 )}
               >
@@ -163,7 +161,7 @@ export function SettingsPage() {
 
       <Section title="Organization defaults" desc="Pre-filled into new stamps and used on exported history records.">
         <div className="flex items-center gap-4">
-          <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
+          <div className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-200 shadow-inner dark:border-slate-700 dark:from-slate-800 dark:to-slate-900">
             {org.logoDataUrl ? (
               <img src={org.logoDataUrl} alt="Organization logo" className="h-full w-full object-contain" />
             ) : (

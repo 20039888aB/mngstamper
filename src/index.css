@@ -17,6 +17,37 @@
   body {
     @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+    /* Depth: a soft, fixed brand-tinted wash behind the whole app shell. */
+    background-image:
+      radial-gradient(60rem 60rem at 100% -10%, rgb(37 99 235 / 0.06), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 110%, rgb(30 58 138 / 0.06), transparent 55%);
+    background-attachment: fixed;
+  }
+  .dark body {
+    background-image:
+      radial-gradient(60rem 60rem at 100% -10%, rgb(59 130 246 / 0.10), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 110%, rgb(37 99 235 / 0.10), transparent 55%);
+  }
+  ::selection {
+    @apply bg-brand-600/20 text-inherit;
+  }
+  /* Slim, on-brand scrollbar (Chromium + Firefox). */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(100 116 139 / 0.4) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300/70 dark:bg-slate-700/70;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400/80 dark:bg-slate-600/80;
   }
   /* Always-visible focus for keyboard users (spec section 31). */
   *:focus-visible {
@@ -26,25 +57,34 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-transparent px-3.5 py-2 text-sm font-medium transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
   }
   .btn-primary {
-    @apply bg-brand-700 text-white hover:bg-brand-800 active:bg-brand-900;
+    @apply bg-brand-gradient text-white shadow-sm shadow-brand-900/25 ring-1 ring-inset ring-white/10 hover:shadow-md hover:shadow-brand-900/30 hover:brightness-[1.06] active:brightness-95;
   }
   .btn-secondary {
-    @apply border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800;
+    @apply border-slate-300 bg-white/80 text-slate-700 shadow-sm backdrop-blur hover:border-slate-300 hover:bg-white hover:shadow active:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800 dark:active:bg-slate-800/80;
   }
   .btn-ghost {
-    @apply text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
+    @apply text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200/70 dark:text-slate-300 dark:hover:bg-slate-800 dark:active:bg-slate-700/70;
   }
   .card {
-    @apply rounded-xl border border-slate-200 bg-white shadow-card dark:border-slate-800 dark:bg-slate-900;
+    @apply rounded-2xl border border-slate-200/80 bg-white/90 shadow-card ring-1 ring-black/[0.02] backdrop-blur-sm transition-shadow duration-300 dark:border-slate-800 dark:bg-slate-900/80;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400;
+  }
+  .text-gradient-brand {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
   }
   .field-label {
     @apply mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400;
   }
   .input {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-inner placeholder:text-slate-400 transition-shadow focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
   }
 
   /* Premium glass-morphism surfaces — used by the dashboard hero, which sits

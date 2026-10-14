@@ -80,7 +80,7 @@ export function DesignStampPage() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-3">
         <div>
-          <h2 className="text-xl font-semibold">{t('nav.design')}</h2>
+          <h2 className="text-xl font-semibold tracking-tight">{t('nav.design')}</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
             Design a reusable stamp, then save it to your template library.
           </p>
@@ -134,16 +134,14 @@ export function DesignStampPage() {
 
       {/* Template library */}
       <section>
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-          Template library
-        </h3>
+        <h3 className="eyebrow mb-2">Template library</h3>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {templates.all.map((tpl) => (
             <article
               key={tpl.id}
               className={cn(
-                'card group flex flex-col overflow-hidden',
-                tpl.id === editingId && 'ring-2 ring-brand-500',
+                'card card-hover group flex flex-col overflow-hidden',
+                tpl.id === editingId && 'shadow-glow ring-2 ring-brand-500',
               )}
             >
               <button

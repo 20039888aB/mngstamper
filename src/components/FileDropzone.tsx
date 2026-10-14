@@ -46,10 +46,10 @@ export function FileDropzone({ onFile, busy, maxBytes }: Props) {
       onDragLeave={() => setDragOver(false)}
       onDrop={onDrop}
       className={cn(
-        'flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-6 py-12 text-center transition-colors',
+        'group flex flex-col items-center justify-center gap-3 rounded-3xl border-2 border-dashed px-6 py-12 text-center transition-all duration-300',
         dragOver
-          ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/30'
-          : 'border-slate-300 bg-white hover:border-brand-400 dark:border-slate-700 dark:bg-slate-900',
+          ? 'scale-[1.01] border-brand-500 bg-brand-gradient-soft shadow-glow'
+          : 'border-slate-300 bg-white/70 hover:border-brand-400 hover:shadow-card-hover dark:border-slate-700 dark:bg-slate-900/60',
         busy ? 'cursor-wait opacity-70' : 'cursor-pointer',
       )}
     >
@@ -60,7 +60,9 @@ export function FileDropzone({ onFile, busy, maxBytes }: Props) {
         className="sr-only"
         onChange={(e) => handleFiles(e.target.files)}
       />
-      <IconUpload width={32} height={32} className="text-brand-600 dark:text-brand-300" />
+      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-gradient text-white shadow-md shadow-brand-900/25 ring-1 ring-inset ring-white/20 transition-transform duration-300 group-hover:scale-105">
+        <IconUpload width={26} height={26} />
+      </span>
       <div>
         <p className="text-base font-semibold text-slate-800 dark:text-slate-100">
           {t('drop.title')}
